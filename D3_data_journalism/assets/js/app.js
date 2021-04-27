@@ -20,12 +20,12 @@ var svg = d3.select("chart")
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-d3.csv("./data.csv").then(function(stateData){
+d3.csv("./assets/data/data.csv").then(function(stateData){
     
     stateData.forEach(function(data) {
         data.age = +data.age;
         data.income = +data.income;
-        console.log(data.age)
+        // console.log(data.age)
     });
 
     var xLinearScale = d3.scaleLinear()
@@ -37,7 +37,7 @@ d3.csv("./data.csv").then(function(stateData){
         .range([height,0]);
 
     var bottomAxis = d3.axisBottom(xLinearScale);
-    var leftAxis = d3.axistLeft(yLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
 
     chartGroup.append("g")
         .attr("transform", `translate(0, ${height})`)
@@ -75,7 +75,7 @@ d3.csv("./data.csv").then(function(stateData){
     chartGroup.append("text")
         .attr("transform", "rotate(-90")
         .attr("y", 0 - margin.left + 40)
-        attr("x", 0 - (height/2))
+        .attr("x", 0 - (height/2))
         .attr("dy", "1em")
         .attr("class", "axisText")
         .text("Age vs. Income");
