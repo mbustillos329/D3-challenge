@@ -21,7 +21,7 @@ var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 d3.csv("./assets/data/data.csv").then(function(stateData){
-    
+   
     stateData.forEach(function(data) {
         data.age = +data.age;
         data.income = +data.income;
@@ -87,3 +87,5 @@ d3.csv("./assets/data/data.csv").then(function(stateData){
     }).catch(function(error) {
         console.log(error);
     });
+    
+   
