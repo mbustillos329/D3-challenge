@@ -1,4 +1,5 @@
 // @TODO: YOUR CODE HERE!
+
 var svgWidth = 960;
 var svgHeight = 500;
 
@@ -12,7 +13,7 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-var svg = d3.select("chart")
+var svg = d3.select("#scatter")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
@@ -30,7 +31,7 @@ d3.csv("./assets/data/data.csv").then(function(stateData){
 
     var xLinearScale = d3.scaleLinear()
         .domain([20, d3.max(stateData, d => d.age)])
-        .range([height,0]);
+        .range([0,width]);
     
     var yLinearScale = d3.scaleLinear()
         .domain([0, d3.max(stateData, d => d.income)])
@@ -68,24 +69,24 @@ d3.csv("./assets/data/data.csv").then(function(stateData){
     circlesGroup.on("click", function(data) {
         toolTip.show(data, this);
       })
-        .on("mouseout", function(data, index) {
+        .on("mouseover", function(data, index) {
           toolTip.hide(data);
         });
     
     chartGroup.append("text")
-        .attr("transform", "rotate(-90")
+        .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left + 40)
-        .attr("x", 0 - (height/2))
+        .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "axisText")
-        .text("Age vs. Income");
+        .text("Income");
 
     chartGroup.append("text")
         .attr("transform", `translate(${width/2}, ${height + margin.top + 30})`)
         .attr("class", "axisText")
-        .text("test");
+        .text("Age");
+
     }).catch(function(error) {
         console.log(error);
     });
-    
-   
+ 
